@@ -1,0 +1,56 @@
+---
+// Contato-F: Map Focus - Design focado em localização física e acesso
+interface Props { title: string; subtitle?: string; desc?: string; content?: string;
+}
+const { title, subtitle, desc, content } = Astro.props;
+const description = subtitle || desc || '';
+
+const locations = [
+  { city: 'São Paulo', address: 'Av. Paulista, 1000 - Bela Vista', tel: '(11) 3211-1234' },
+  { city: 'Rio de Janeiro', address: 'Rua Lauro Müller, 116 - Botafogo', tel: '(21) 2222-1234' }
+];
+---
+<section class="py-24 bg-white overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-24">
+       <span class="text-[10px] font-black uppercase text-primary tracking-[0.4em] mb-4 block animate-bounce-subtle">Sede Nacional</span>
+       <h1 class="text-5xl md:text-7xl font-black text-dark tracking-tighter uppercase mb-6 italic leading-none">{title}</h1>
+      {content && <p class="text-gray-500 mt-4 leading-relaxed">{content}</p>}
+       <p class="text-xl text-gray-400 font-medium leading-relaxed italic">{description}</p>
+    </div>
+
+    <!-- Map Placeholder -->
+    <div class="aspect-video w-full bg-gray-50 rounded-[4rem] mb-24 overflow-hidden border border-gray-100 shadow-2xl relative group">
+       <!-- Mock map background -->
+       <div class="absolute inset-0 grayscale group-hover:grayscale-0 transition-all duration-1000" style="background-image: radial-gradient(circle at 10px 10px, #e5e7eb 1px, transparent 1px); background-size: 40px 40px;"></div>
+       <div class="absolute inset-0 flex items-center justify-center">
+          <div class="flex flex-col items-center gap-6 group-hover:scale-110 transition-transform">
+             <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-3xl shadow-[0_0_50px_rgba(var(--color-primary),0.5)] animate-pulse">📍</div>
+             <span class="text-xs font-black uppercase bg-dark text-white px-4 py-2 rounded-xl tracking-widest">Encontre-nos</span>
+          </div>
+       </div>
+    </div>
+
+    <!-- Locations Grid -->
+    <div class="grid md:grid-cols-2 gap-12">
+       {locations.map(loc => (
+         <div class="p-10 rounded-[3rem] bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-2xl transition-all group">
+            <h4 class="text-3xl font-black text-dark mb-6 tracking-tight uppercase italic group-hover:text-primary transition-colors">{loc.city}</h4>
+            <p class="text-lg text-gray-500 font-medium leading-relaxed mb-8">{loc.address}</p>
+            <div class="flex items-center justify-between border-t border-gray-200 pt-8 mt-8">
+               <div class="text-sm font-black text-dark uppercase tracking-widest">{loc.tel}</div>
+               <a href="#" class="px-6 py-3 bg-white border border-gray-100 rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-dark hover:text-white transition-all">Abrir Waze →</a>
+            </div>
+         </div>
+       ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .animate-bounce-subtle { animation: bounce-subtle 3s ease-in-out infinite; }
+</style>

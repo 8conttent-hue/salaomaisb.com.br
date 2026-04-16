@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "Sobre Nós",
+    "description": "Conheça o SALAOMAISB"
+  },
+  "hero": {
+    "title": "Sobre Nós",
+    "subtitle": "O SALAOMAISB é um blog dedicado a compartilhar tudo sobre moda e beleza. Aqui, você encontra inspiração, dicas práticas e as últimas tendências do universo fashion."
+  },
+  "content": "SALAOMAISB nasceu da paixão pela moda e pela vontade de compartilhar conhecimento e inspiração com todos. Nosso foco é proporcionar um espaço acolhedor onde todos se sintam à vontade para explorar e descobrir sua verdadeira essência no mundo da moda.",
+  "mission": "Nossa missão é empoderar nossos leitores através da moda, oferecendo conteúdos relevantes e acessíveis que ajudem cada um a expressar sua individualidade.",
+  "image": "/images/sobre.jpg",
+  "stats": [
+    {
+      "value": "500+",
+      "label": "Artigos"
+    },
+    {
+      "value": "100k+",
+      "label": "Leitores"
+    },
+    {
+      "value": "5",
+      "label": "Redatores"
+    }
+  ],
+  "team": []
+}

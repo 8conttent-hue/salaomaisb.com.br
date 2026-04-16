@@ -1,0 +1,46 @@
+---
+// Features-E: Video Thumbnail Cards - Focado em análise visual
+interface Item { icon: string; title: string; desc: string; }
+interface Props { title: string; items: Item[]; }
+const { title, items } = Astro.props;
+---
+<section class="py-24 bg-gray-50 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div class="max-w-2xl">
+        <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Multimídia</span>
+        <h2 class="text-4xl md:text-5xl font-black text-dark tracking-tighter">{title}</h2>
+      </div>
+      <div class="hidden md:block h-px flex-1 bg-gray-200 mx-12 mb-4"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {items.map((item) => (
+        <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all group">
+          <!-- Video Mockup Area -->
+          <div class="aspect-video bg-dark relative flex items-center justify-center overflow-hidden">
+             <!-- Placeholder icon instead of real img/video for diversity -->
+             <div class="absolute inset-0 bg-primary/20 bg-opacity-20 animate-pulse"></div>
+             <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 z-10 scale-90 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+             </div>
+             <!-- Overlay info -->
+             <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-dark/60 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest border border-white/10">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> REC 00:45
+             </div>
+          </div>
+          
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">{item.icon}</span>
+              <h3 class="text-lg font-black text-dark tracking-tight leading-none">{item.title}</h3>
+            </div>
+            <p class="text-sm text-gray-500 leading-relaxed font-medium">
+              {item.desc}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+---
+// Sobre-E: Team Showcase - Foco em autoridade acadêmica e pessoal
+interface Stat { value: string; label: string; }
+interface Props {
+  title: string;
+  subtitle?: string;
+  desc?: string;
+  image: string;
+  stats: Stat[];
+  content?: string;
+}
+const { title, subtitle, desc, image, content } = Astro.props;
+const description = subtitle || desc || '';
+
+const team = [
+  { name: 'Dr. Gustavo Souza', role: 'Enfermeiro Pesquisador', bio: 'Especialista em análise de mídias curtas aplicadas ao cuidado de enfermagem no TEA.' },
+  { name: 'Dra. Ana Costa', role: 'Especialista em TEA', bio: 'Psicóloga com foco em intervenções comportamentais e suporte familiar.' },
+  { name: 'Me. Ricardo Lima', role: 'Análise de Dados', bio: 'Especialista em netnografia e processamento de informações digitais.' }
+];
+---
+<section class="py-24 bg-gray-50 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4">
+    <!-- Hero side -->
+    <div class="grid lg:grid-cols-2 gap-20 items-center mb-32">
+      <div class="relative group">
+         <div class="aspect-square rounded-[3rem] overflow-hidden shadow-2xl relative z-10 border-8 border-white">
+            <img src={image} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105" alt="Principal Specialist" />
+         </div>
+         <!-- Decorative background -->
+         <div class="absolute -z-0 -top-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+      </div>
+      <div>
+         <h1 class="text-4xl md:text-6xl font-black text-dark tracking-tighter mb-8 leading-none uppercase italic">{title}</h1>
+         <p class="text-xl text-gray-400 font-medium leading-relaxed italic mb-10">"{description}"</p>
+         <div class="flex items-center gap-4">
+            <div class="h-1 w-16 bg-primary"></div>
+            <span class="text-[10px] font-black uppercase tracking-[0.4em] text-dark">Nossa Equipe de Pesquisa</span>
+         </div>
+      </div>
+    </div>
+
+    <!-- Team Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+      {team?.map((member) => (
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all group overflow-hidden relative">
+          <div class="relative z-10">
+            <div class="w-16 h-1 bg-primary mb-8 opacity-40 group-hover:opacity-100 transition-opacity"></div>
+            <h3 class="text-2xl font-black text-dark mb-2 tracking-tight uppercase leading-none">{member.name}</h3>
+            <div class="text-xs font-black text-primary uppercase tracking-[0.3em] mb-6">{member.role}</div>
+            <p class="text-sm text-gray-400 leading-relaxed font-medium">
+              {member.bio}
+            </p>
+            
+            <div class="mt-8 flex gap-4 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-100 transition-all">
+               <div class="w-6 h-6 rounded-full bg-gray-200"></div>
+               <div class="w-6 h-6 rounded-full bg-gray-200"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

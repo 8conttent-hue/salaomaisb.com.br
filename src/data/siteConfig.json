@@ -1,0 +1,53 @@
+{
+  "name": "SALAOMAISB",
+  "slug": "salaomaisb.com.br",
+  "description": "blog sobre moda",
+  "url": "https://salaomaisb.com.br",
+  "niche": "Moda e Beleza",
+  "keywords": "blog sobre moda",
+  "email": "contato@salaomaisb.com.br",
+  "palette": "violet",
+  "colors": {
+    "primary": "#7c3aed",
+    "accent": "#5b21b6",
+    "dark": "#2e1065"
+  },
+  "headerContrast": "light",
+  "font": "poppins",
+  "fontFamily": "'Poppins', sans-serif",
+  "fontUrl": "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap",
+  "components": {
+    "header": "Header-F",
+    "hero": "Hero-A",
+    "features": "Features-E",
+    "about": "About-H",
+    "posts": "Posts-J",
+    "footer": "Footer-I",
+    "sobre": "Sobre-E",
+    "contato": "Contato-F"
+  },
+  "menu": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog"
+    },
+    {
+      "label": "Sobre",
+      "href": "/sobre"
+    },
+    {
+      "label": "Contato",
+      "href": "/contato"
+    }
+  ],
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "twitter": "",
+    "youtube": ""
+  }
+}

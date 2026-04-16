@@ -1,0 +1,115 @@
+---
+// Header-F: Glassmorphic Floating - Header flutuante com desfoque
+import siteConfig from '../data/siteConfig.json';
+import { getAllPosts } from '../lib/posts';
+
+const { name, menu: baseMenu = [] } = siteConfig;
+
+// Buscar categorias REAIS do banco de dados (SSR)
+const allPosts = await getAllPosts();
+const realCategories = [...new Set(allPosts.map(p => p.category))].filter(Boolean);
+
+// Injetar categorias reais no item "Blog" do menu
+const menu = baseMenu.map((item: any) => {
+  if (item.label.toLowerCase() === 'blog' || item.href === '/blog') {
+    return {
+      ...item,
+      children: realCategories.length
+        ? realCategories.map(cat => ({
+            label: cat,
+            href: `/categoria/${cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-')}`
+          }))
+        : undefined,
+    };
+  }
+  return item;
+});
+---
+<div class="fixed top-4 left-0 right-0 z-[100] px-4">
+  <header class="max-w-5xl mx-auto bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-2xl transition-all hover:bg-white">
+    <div class="px-6 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-sm font-black shadow-lg shadow-primary/20">
+          {name.charAt(0).toUpperCase()}
+        </div>
+        <span class="font-bold text-lg text-dark group-hover:text-primary transition-colors">{name}</span>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="hidden md:flex items-center bg-gray-100/50 rounded-full px-2 py-1">
+        {menu.map((item: any) => (
+        item.children?.length ? (
+          <div class="relative group">
+            <button type="button" class="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-dark hover:bg-white rounded-full transition-all cursor-pointer">
+              {item.label}
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="absolute top-full left-0 z-[110] pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div class="w-48 bg-white/95 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl py-2">
+                <a href={item.href} class="block px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-primary transition-colors mb-1">
+                  Ver Tudo
+                </a>
+                {item.children.map((child: any) => (
+                  <a
+                    href={child.href}
+                    class="block px-4 py-2 text-sm text-gray-600 hover:text-primary hover:bg-slate-50 transition-colors"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+            <a
+              href={item.href}
+              class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-dark hover:bg-white rounded-full transition-all"
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+      </nav>
+
+      <!-- CTA -->
+      <div class="flex items-center gap-3">
+        <a
+          href="/blog"
+          class="hidden sm:flex items-center px-5 py-2 bg-dark text-white text-xs font-bold rounded-xl hover:scale-105 active:scale-95 transition-all uppercase tracking-tight"
+        >
+          Explorar
+        </a>
+
+        <!-- Mobile toggle -->
+        <button id="menu-btn-f" class="md:hidden p-2 text-dark" aria-label="Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu-f" class="hidden md:hidden border-t border-gray-100 bg-white/90 backdrop-blur-xl px-4 py-4 space-y-1">
+      {menu.map((item: any) => (
+        <div>
+          <a href={item.href} class="block px-4 py-2 text-sm font-bold text-gray-800 hover:text-primary rounded-lg transition-colors">{item.label}</a>
+          {item.children?.length ? (
+            <div class="pl-8 space-y-1 mt-1 mb-3">
+              {item.children.map((child: any) => (
+                <a href={child.href} class="block px-4 py-2 text-sm text-gray-500 hover:text-primary hover:bg-gray-50 rounded-lg transition-all border-l-2 border-gray-100">{child.label}</a>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  </header>
+</div>
+
+<script>
+  document.getElementById('menu-btn-f')?.addEventListener('click', () => {
+    document.getElementById('mobile-menu-f')?.classList.toggle('hidden');
+  });
+</script>

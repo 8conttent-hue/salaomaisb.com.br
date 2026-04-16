@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "SALAOMAISB — Explore o Universo da Moda",
+    "description": "Dicas, tendências e inspirações para você arrasar no estilo."
+  },
+  "hero": {
+    "title": "Explore o Universo da Moda",
+    "subtitle": "Dicas, tendências e inspirações para você arrasar no estilo.",
+    "btnText": "Descubra Mais",
+    "bgImage": "/images/hero.jpg",
+    "btnLink": "/blog"
+  },
+  "features": {
+    "title": "O que você encontra no SALAOMAISB",
+    "items": [
+      {
+        "icon": "👗",
+        "title": "Tendências Atualizadas",
+        "desc": "Fique por dentro das últimas tendências do mundo da moda."
+      },
+      {
+        "icon": "💄",
+        "title": "Dicas de Beleza",
+        "desc": "Aprenda truques e dicas de beleza para realçar sua beleza natural."
+      },
+      {
+        "icon": "🛍️",
+        "title": "Looks Inspiradores",
+        "desc": "Descubra combinações de looks que vão transformar seu estilo."
+      }
+    ]
+  },
+  "about": {
+    "title": "Sobre o SALAOMAISB",
+    "desc": "O SALAOMAISB é um blog dedicado a compartilhar tudo sobre moda e beleza. Aqui, você encontra inspiração, dicas práticas e as últimas tendências do universo fashion.",
+    "stats": [
+      {
+        "value": "10k+",
+        "label": "Leitores Mensais"
+      },
+      {
+        "value": "300+",
+        "label": "Artigos Publicados"
+      },
+      {
+        "value": "50+",
+        "label": "Colaboradores Especializados"
+      }
+    ],
+    "image": "/images/about.jpg",
+    "btnText": "Saiba Mais",
+    "btnLink": "/sobre"
+  },
+  "posts": {
+    "title": "Últimos Artigos",
+    "limit": 3,
+    "btnText": "Ver Blog",
+    "btnLink": "/blog"
+  }
+}

@@ -1,0 +1,54 @@
+---
+// Posts-J: Compact News Ticker - Alta densidade de informação
+import { getAllPosts } from '../lib/posts';
+interface Props { title: string; limit: number; btnText: string; btnLink: string; }
+const { title, limit, btnText, btnLink } = Astro.props;
+
+const posts = (await getAllPosts()).slice(0, limit);
+---
+<section class="py-24 bg-gray-50 border-y border-gray-100">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex items-center gap-8 mb-16">
+      <h2 class="text-3xl md:text-5xl font-black text-dark tracking-tighter leading-none shrink-0">{title}</h2>
+      <div class="h-px flex-1 bg-gray-200"></div>
+      <a href={btnLink} class="text-[10px] font-black uppercase tracking-[0.3em] text-primary hover:text-dark transition-all shrink-0">
+        VER FEED COMPLETO
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map((post) => (
+        <article class="group bg-white rounded-2xl p-4 flex gap-6 items-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all border border-gray-100 duration-500">
+          <div class="w-20 h-20 flex-shrink-0 bg-gray-100 rounded-xl overflow-hidden shadow-inner relative group-hover:bg-primary transition-colors">
+            {post.heroImage && (
+              <img
+                src={post.heroImage}
+                alt={post.title}
+                class="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+              />
+            )}
+            <div class="absolute inset-0 bg-primary/20 group-hover:opacity-0 transition-opacity"></div>
+          </div>
+          
+          <div class="flex-1 space-y-2">
+            <span class="text-[9px] font-black uppercase text-gray-400 group-hover:text-primary tracking-widest leading-none">{post.category || 'Notícia'}</span>
+            <h3 class="text-sm font-black text-dark leading-tight tracking-tight uppercase group-hover:text-primary transition-colors line-clamp-2">
+               <a href={`/${post.slug}`}>{post.title}</a>
+            </h3>
+            <div class="text-[9px] font-black text-gray-300 uppercase tracking-widest">{new Date(post.pubDate).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' })}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-16 flex items-center justify-center p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-2xl transition-all">
+       <div class="absolute -left-10 top-1/2 -translate-y-1/2 text-8xl font-black text-gray-50 uppercase tracking-tighter italic z-0 select-none group-hover:text-primary/5 transition-colors">NEWS FEED</div>
+       <div class="relative z-10 flex flex-col items-center gap-4">
+          <p class="text-sm font-black text-dark italic lowercase tracking-wider">Acompanhe as últimas atualizações em tempo real</p>
+          <a href={btnLink} class="px-10 py-4 bg-dark text-white rounded-xl font-black uppercase tracking-[0.3em] text-[8px] hover:bg-primary transition-all shadow-xl shadow-dark/20">
+             {btnText} Agora
+          </a>
+       </div>
+    </div>
+  </div>
+</section>

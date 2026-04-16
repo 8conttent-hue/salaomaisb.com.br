@@ -1,0 +1,48 @@
+---
+// Footer-I: Left-Aligned Minimal - Design assimétrico e limpo
+import siteConfig from '../data/siteConfig.json';
+const { name, menu = [] } = siteConfig as any;
+const year = new Date().getFullYear();
+---
+<footer class="bg-white py-24 border-t border-gray-100">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex flex-col gap-12">
+      
+      <!-- Logo e Descrição -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div class="max-w-md">
+          <a href="/" class="text-4xl font-black text-dark tracking-tighter uppercase mb-6 block">
+            {name}<span class="text-primary text-6xl leading-none">.</span>
+          </a>
+          <p class="text-lg text-gray-400 font-medium leading-relaxed">
+            Unindo tecnologia, saúde e novas mídias para um cuidado mais eficiente.
+          </p>
+        </div>
+        
+        <!-- Socials -->
+        <div class="flex gap-4">
+           {['In', 'Tw', 'Yt'].map(s => (
+             <a href="#" class="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-xs font-black text-dark hover:bg-primary hover:text-white hover:border-primary transition-all">
+               {s}
+             </a>
+           ))}
+        </div>
+      </div>
+
+      <!-- Horizontal Menu -->
+      <nav class="flex flex-wrap items-center gap-x-12 gap-y-4 pt-12 border-t border-gray-100">
+        {menu.map((item: any) => (
+          <a href={item.href} class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 hover:text-dark transition-all">
+            {item.label}
+          </a>
+        ))}
+        <a href="/contato" class="text-xs font-black uppercase tracking-[0.3em] text-primary">Contato</a>
+      </nav>
+
+      <!-- Copyright -->
+      <p class="text-[10px] font-bold text-gray-300 uppercase tracking-widest leading-none">
+        © {year} {name} • TODOS OS DIREITOS RESERVADOS.
+      </p>
+    </div>
+  </div>
+</footer>
