@@ -1,10 +1,10 @@
 ---
 // Posts-J: Compact News Ticker - Alta densidade de informação
-import { getAllPosts } from '../lib/posts';
+import { getPosts } from '../lib/posts';
 interface Props { title: string; limit: number; btnText: string; btnLink: string; }
 const { title, limit, btnText, btnLink } = Astro.props;
 
-const posts = (await getAllPosts()).slice(0, limit);
+const posts = (await getPosts()).slice(0, limit);
 ---
 <section class="py-24 bg-gray-50 border-y border-gray-100">
   <div class="max-w-6xl mx-auto px-4">
@@ -20,9 +20,9 @@ const posts = (await getAllPosts()).slice(0, limit);
       {posts.map((post) => (
         <article class="group bg-white rounded-2xl p-4 flex gap-6 items-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all border border-gray-100 duration-500">
           <div class="w-20 h-20 flex-shrink-0 bg-gray-100 rounded-xl overflow-hidden shadow-inner relative group-hover:bg-primary transition-colors">
-            {post.heroImage && (
+            {post.featured_image && (
               <img
-                src={post.heroImage}
+                src={post.featured_image}
                 alt={post.title}
                 class="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
               />
@@ -31,11 +31,11 @@ const posts = (await getAllPosts()).slice(0, limit);
           </div>
           
           <div class="flex-1 space-y-2">
-            <span class="text-[9px] font-black uppercase text-gray-400 group-hover:text-primary tracking-widest leading-none">{post.category || 'Notícia'}</span>
+            <span class="text-[9px] font-black uppercase text-gray-400 group-hover:text-primary tracking-widest leading-none">{post.category || 'Artigo'}</span>
             <h3 class="text-sm font-black text-dark leading-tight tracking-tight uppercase group-hover:text-primary transition-colors line-clamp-2">
                <a href={`/${post.slug}`}>{post.title}</a>
             </h3>
-            <div class="text-[9px] font-black text-gray-300 uppercase tracking-widest">{new Date(post.pubDate).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' })}</div>
+            <div class="text-[9px] font-black text-gray-300 uppercase tracking-widest">{new Date(post.published_at).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' })}</div>
           </div>
         </article>
       ))}

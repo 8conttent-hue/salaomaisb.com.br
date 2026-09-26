@@ -1,29 +1,8 @@
 ---
 // Header-F: Glassmorphic Floating - Header flutuante com desfoque
 import siteConfig from '../data/siteConfig.json';
-import { getAllPosts } from '../lib/posts';
 
-const { name, menu: baseMenu = [] } = siteConfig;
-
-// Buscar categorias REAIS do banco de dados (SSR)
-const allPosts = await getAllPosts();
-const realCategories = [...new Set(allPosts.map(p => p.category))].filter(Boolean);
-
-// Injetar categorias reais no item "Blog" do menu
-const menu = baseMenu.map((item: any) => {
-  if (item.label.toLowerCase() === 'blog' || item.href === '/blog') {
-    return {
-      ...item,
-      children: realCategories.length
-        ? realCategories.map(cat => ({
-            label: cat,
-            href: `/categoria/${cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-')}`
-          }))
-        : undefined,
-    };
-  }
-  return item;
-});
+const { name, menu = [] } = siteConfig;
 ---
 <div class="fixed top-4 left-0 right-0 z-[100] px-4">
   <header class="max-w-5xl mx-auto bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-2xl transition-all hover:bg-white">
